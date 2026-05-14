@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Neuron Prompt Forge
 
-## Getting Started
+Production-ready Next.js app that turns rough goals into **structured prompt packs**: a refined prompt, alternates, QA checklist, risk notes, and a suggested system message. Uses **your** OpenAI API key only — nothing is stored on the server.
 
-First, run the development server:
+## Stack
+
+- Next.js 16 (App Router) + React 19 + TypeScript
+- Tailwind CSS v4
+- OpenAI SDK (Chat Completions, JSON mode)
+
+## Quick start
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Paste your OpenAI API key in the bar (stored in `localStorage` in your browser only).
+2. Choose a model (`gpt-4o-mini` recommended for cost).
+3. Describe the goal, audience, tone, and constraints — run **Forge prompt pack**.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Environment
 
-## Learn More
+No server `.env` is required for the AI path: the browser sends `Authorization: Bearer <key>` to this app’s API route, which proxies a single hop to OpenAI. **Do not** commit keys or deploy without HTTPS.
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Works on Vercel, Netlify, or any Node host. Set nothing secret in the dashboard — users supply keys in the UI.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Scripts
 
-## Deploy on Vercel
+- `npm run dev` — local development
+- `npm run build` — production build
+- `npm run start` — serve production build
+- `npm run lint` — ESLint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
