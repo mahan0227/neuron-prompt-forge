@@ -1,12 +1,28 @@
 # Neuron Prompt Forge
 
-Production-ready Next.js app that turns rough goals into **structured prompt packs**: a refined prompt, alternates, QA checklist, risk notes, and a suggested system message. Uses **your** OpenAI API key only — nothing is stored on the server.
+Turn a rough goal into a **structured prompt pack** you can paste into any LLM workflow: one refined prompt, alternates, a QA checklist, risk notes, and an optional system message.
+
+## What it is
+
+A small Next.js app with a single API route that calls OpenAI in **JSON mode** and returns a consistent object shape. Your API key stays in the browser (sent as `Authorization: Bearer` only to your deployment).
+
+## Why it’s useful
+
+- Saves iteration time before you wire prompts into code or agents.
+- Surfaces **failure modes** (where the prompt can be misread) before users hit them.
+- Gives **variants** for A/B testing or fallback phrasing.
+- Ships a **checklist** so PMs and engineers agree on “done” for prompt quality.
+
+## Where you can use it
+
+- **Product & AI teams** — shaping prompts for support bots, internal copilots, or RAG apps.
+- **Consultancies** — quick client workshops to align on tone and guardrails.
+- **Engineering** — documenting the “v1” prompt next to a feature flag or eval harness.
+- **Education** — teaching prompt structure without exposing a shared vendor account (BYOK).
 
 ## Stack
 
-- Next.js 16 (App Router) + React 19 + TypeScript
-- Tailwind CSS v4
-- OpenAI SDK (Chat Completions, JSON mode)
+Next.js 16 · React 19 · TypeScript · Tailwind CSS v4 · OpenAI Chat Completions (JSON mode)
 
 ## Quick start
 
@@ -15,26 +31,29 @@ npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
 1. Paste your OpenAI API key in the bar (stored in `localStorage` in your browser only).
-2. Choose a model (`gpt-4o-mini` recommended for cost).
-3. Describe the goal, audience, tone, and constraints — run **Forge prompt pack**.
+2. Set goal, audience, tone, constraints → **Forge prompt pack**.
 
-## Environment
+## Production check
 
-No server `.env` is required for the AI path: the browser sends `Authorization: Bearer <key>` to this app’s API route, which proxies a single hop to OpenAI. **Do not** commit keys or deploy without HTTPS.
+```bash
+npm run build
+npm run start
+```
+
+## API
+
+`POST /api/forge` with header `Authorization: Bearer <OPENAI_API_KEY>`.
+
+Body (JSON): `goal` (required), optional `audience`, `tone`, `constraints`, `model` (default `gpt-4o-mini`).
 
 ## Deploy
 
-Works on Vercel, Netlify, or any Node host. Set nothing secret in the dashboard — users supply keys in the UI.
+Vercel, Netlify, or any Node host. No server-side API keys required; use HTTPS in production.
 
-## Scripts
+## Suite brochure
 
-- `npm run dev` — local development
-- `npm run build` — production build
-- `npm run start` — serve production build
-- `npm run lint` — ESLint
+Static overview of all Neuron tools: [`docs/neuron-suite-brochure.html`](docs/neuron-suite-brochure.html) · square graphic: [`docs/neuron-suite-ig-square.svg`](docs/neuron-suite-ig-square.svg).
 
 ## License
 
